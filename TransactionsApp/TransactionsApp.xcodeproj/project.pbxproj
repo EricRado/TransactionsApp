@@ -12,6 +12,11 @@
 		A63E599826BED88000CE6FFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63E599726BED88000CE6FFC /* ViewController.swift */; };
 		A63E599D26BED88200CE6FFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A63E599C26BED88200CE6FFC /* Assets.xcassets */; };
 		A63E59A026BED88200CE6FFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A63E599E26BED88200CE6FFC /* LaunchScreen.storyboard */; };
+		A63E59A926BEDBE600CE6FFC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63E59A826BEDBE600CE6FFC /* NetworkManager.swift */; };
+		A63E59AB26BEDC1400CE6FFC /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63E59AA26BEDC1400CE6FFC /* HTTPMethod.swift */; };
+		A63E59AD26BEDC2C00CE6FFC /* EndpointConstructable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63E59AC26BEDC2C00CE6FFC /* EndpointConstructable.swift */; };
+		A63E59AF26BEDC4F00CE6FFC /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63E59AE26BEDC4F00CE6FFC /* HTTPTask.swift */; };
+		A63E59B226BEDC7B00CE6FFC /* TransactionEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A63E59B126BEDC7B00CE6FFC /* TransactionEndpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		A63E599C26BED88200CE6FFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A63E599F26BED88200CE6FFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A63E59A126BED88200CE6FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A63E59A826BEDBE600CE6FFC /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A63E59AA26BEDC1400CE6FFC /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		A63E59AC26BEDC2C00CE6FFC /* EndpointConstructable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointConstructable.swift; sourceTree = "<group>"; };
+		A63E59AE26BEDC4F00CE6FFC /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		A63E59B126BEDC7B00CE6FFC /* TransactionEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEndpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +64,8 @@
 		A63E599226BED88000CE6FFC /* TransactionsApp */ = {
 			isa = PBXGroup;
 			children = (
+				A63E59B026BEDC5800CE6FFC /* Endpoints */,
+				A63E59A726BEDB0600CE6FFC /* Network */,
 				A63E599326BED88000CE6FFC /* AppDelegate.swift */,
 				A63E599526BED88000CE6FFC /* SceneDelegate.swift */,
 				A63E599726BED88000CE6FFC /* ViewController.swift */,
@@ -62,6 +74,25 @@
 				A63E59A126BED88200CE6FFC /* Info.plist */,
 			);
 			path = TransactionsApp;
+			sourceTree = "<group>";
+		};
+		A63E59A726BEDB0600CE6FFC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A63E59A826BEDBE600CE6FFC /* NetworkManager.swift */,
+				A63E59AA26BEDC1400CE6FFC /* HTTPMethod.swift */,
+				A63E59AC26BEDC2C00CE6FFC /* EndpointConstructable.swift */,
+				A63E59AE26BEDC4F00CE6FFC /* HTTPTask.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A63E59B026BEDC5800CE6FFC /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				A63E59B126BEDC7B00CE6FFC /* TransactionEndpoint.swift */,
+			);
+			path = Endpoints;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,9 +164,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A63E59AF26BEDC4F00CE6FFC /* HTTPTask.swift in Sources */,
+				A63E59AD26BEDC2C00CE6FFC /* EndpointConstructable.swift in Sources */,
+				A63E59A926BEDBE600CE6FFC /* NetworkManager.swift in Sources */,
 				A63E599826BED88000CE6FFC /* ViewController.swift in Sources */,
 				A63E599426BED88000CE6FFC /* AppDelegate.swift in Sources */,
+				A63E59AB26BEDC1400CE6FFC /* HTTPMethod.swift in Sources */,
 				A63E599626BED88000CE6FFC /* SceneDelegate.swift in Sources */,
+				A63E59B226BEDC7B00CE6FFC /* TransactionEndpoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
