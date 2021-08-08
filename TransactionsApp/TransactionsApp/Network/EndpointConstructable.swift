@@ -14,7 +14,7 @@ protocol EndpointConstructable {
 }
 
 extension EndpointConstructable {
-    var baseURL: String {
+    var baseUrl: String {
         return "https://m1-technical-assessment-data.netlify.app"
     }
 }

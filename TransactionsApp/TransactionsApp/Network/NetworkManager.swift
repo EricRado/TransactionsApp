@@ -8,7 +8,7 @@
 import Foundation
 
 enum NetworkError: String, Error {
-    case missingURL = "URL is nil."
+    case missingUrl = "URL is nil."
     case unknown
 }
 
@@ -21,7 +21,7 @@ final class NetworkManager {
     
     func request<T: Decodable>(_ endpoint: EndpointConstructable, completion: @escaping (Result<T, Error>) -> ()) {
         guard let request =  buildRequest(from: endpoint) else {
-            completion(.failure(NetworkError.missingURL))
+            completion(.failure(NetworkError.missingUrl))
             return
         }
         
@@ -41,8 +41,37 @@ final class NetworkManager {
         }.resume()
     }
     
+    func requestImage(_ urlString: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        guard let url = URL(string: urlString) else {
+            completion(.failure(NetworkError.missingUrl))
+            return
+        }
+
+        let cache = URLCache.shared
+        let request = URLRequest(url: url)
+
+        if let cachedImageData = cache.cachedResponse(for: request)?.data {
+            completion(.success(cachedImageData))
+        } else {
+            session.downloadTask(with: url) { url, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else if let validURL = url,
+                    let response = response,
+                    let data = try? Data(contentsOf: validURL) {
+
+                    let cachedImageData = CachedURLResponse(response: response, data: data)
+                    cache.storeCachedResponse(cachedImageData, for: request)
+                    completion(.success(data))
+                } else {
+                    completion(.failure(NetworkError.unknown))
+                }
+            }.resume()
+        }
+    }
+    
     private func buildRequest(from endpoint: EndpointConstructable) -> URLRequest? {
-        guard let url = URL(string: endpoint.baseURL)?.appendingPathComponent(endpoint.path) else {
+        guard let url = URL(string: endpoint.baseUrl)?.appendingPathComponent(endpoint.path) else {
             return nil
         }
         
