@@ -48,6 +48,7 @@ final class TransactionDetailViewController: UIViewController {
             let debitView = DebitView()
             debitView.translatesAutoresizingMaskIntoConstraints = false
             debitView.viewModel = debitViewModel
+            debitView.delegate = self
             
             detailView = debitView
         }
@@ -61,4 +62,12 @@ final class TransactionDetailViewController: UIViewController {
         ])
     }
 
+}
+
+extension TransactionDetailViewController: DebitViewDelegate {
+    func noteSavedSuccessful(_ debitView: DebitView) {
+        let alertController = UIAlertController(title: "Note", message: "Save was successful.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

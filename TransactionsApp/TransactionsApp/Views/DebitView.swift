@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol DebitViewDelegate: AnyObject {
+    func noteSavedSuccessful(_ debitView: DebitView)
+}
+
 final class DebitView: UIView {
 
     private let amountLabel: UILabel = {
@@ -26,6 +30,7 @@ final class DebitView: UIView {
     private let noteTextView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.preferredFont(forTextStyle: .body)
         textView.layer.borderWidth = 1.0
         textView.layer.borderColor = UIColor.lightGray.cgColor
         textView.layer.cornerRadius = 3
@@ -35,6 +40,7 @@ final class DebitView: UIView {
     private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         button.backgroundColor = .blue
         button.setTitle("SAVE", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -51,6 +57,8 @@ final class DebitView: UIView {
             noteTextView.text = viewModel.note
         }
     }
+    
+    weak var delegate: DebitViewDelegate?
     
     init() {
         super.init(frame: .zero)
@@ -102,4 +110,14 @@ final class DebitView: UIView {
         stackView.setCustomSpacing(24, after: noteTextView)
     }
 
+    @objc private func saveButtonTapped() {
+        viewModel?.saveNote(with: noteTextView.text)
+        UIView.animate(withDuration: 0.1) { [weak self] in
+            self?.saveButton.alpha = 0.5
+        } completion: { [weak self] _ in
+            guard let strongSelf = self else { return }
+            strongSelf.saveButton.alpha = 1.0
+            strongSelf.delegate?.noteSavedSuccessful(strongSelf)
+        }
+    }
 }

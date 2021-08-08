@@ -19,7 +19,7 @@ struct Transaction {
         self.id = dto.id ?? 0
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd'T'hh:mm:ssZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         self.date = dateFormatter.date(from: dto.date ?? "") ?? Date()
         
         self.amount = dto.amount ?? 0.0
