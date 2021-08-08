@@ -15,11 +15,25 @@ final class CreditView: UIView {
         return imageView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.color = .gray
+        activityIndicator.style = .medium
+        return activityIndicator
+    }()
+    
     var viewModel: CreditViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            imageView.loadImage(from: viewModel.imageUrl)
+            activityIndicator.startAnimating()
+            imageView.loadImage(from: viewModel.imageUrl) { [weak self] isSuccessful in
+                self?.activityIndicator.stopAnimating()
+                if !isSuccessful {
+                    self?.imageView.image = UIImage(named: "NoImageFound")
+                }
+            }
         }
     }
     
@@ -39,6 +53,14 @@ final class CreditView: UIView {
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             imageView.widthAnchor.constraint(equalTo: widthAnchor, constant: 0.5),
             imageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.5)
+        ])
+        
+        addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 75),
+            activityIndicator.widthAnchor.constraint(equalToConstant: 75)
         ])
     }
 }
