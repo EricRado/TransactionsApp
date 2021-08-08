@@ -24,6 +24,10 @@ final class TransactionListViewController: UIViewController {
         return collectionView
     }()
     
+    private lazy var sortBarButtonItem: UIBarButtonItem = {
+        return UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(sortButtonTapped))
+    }()
+    
     private let transactionListViewModel: TransactionListViewModel
     
     init() {
@@ -50,6 +54,7 @@ final class TransactionListViewController: UIViewController {
     
     private func setupView() {
         navigationItem.title = "Transactions"
+        navigationItem.rightBarButtonItem = sortBarButtonItem
         
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -58,6 +63,19 @@ final class TransactionListViewController: UIViewController {
             self.collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    @objc private func sortButtonTapped() {
+        let alertController = UIAlertController(title: "Sort Transaction By", message: nil, preferredStyle: .actionSheet)
+        
+        for state in TransactionSortState.allCases {
+            alertController.addAction(UIAlertAction(title: state.rawValue, style: .default, handler: { _ in
+                self.transactionListViewModel.sort(by: state)
+            }))
+        }
+        alertController.addAction(UIAlertAction(title: "CANCEL", style: .destructive, handler: nil))
+        
+        present(alertController, animated: true, completion: nil)
     }
 }
 
