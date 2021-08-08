@@ -32,7 +32,7 @@ struct TransactionCellViewModel {
             string: "$\(transaction.amount)",
             attributes: [
                 NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .footnote),
-                NSAttributedString.Key.foregroundColor: transaction.isCredit ? UIColor.green : UIColor.red
+                NSAttributedString.Key.foregroundColor: transaction.isCredit ? UIColor.systemGreen : UIColor.red
             ])
     }
 }
