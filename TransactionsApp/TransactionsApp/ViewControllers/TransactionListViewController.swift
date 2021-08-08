@@ -20,6 +20,7 @@ final class TransactionListViewController: UIViewController {
             forCellWithReuseIdentifier: TransactionCell.identifier)
         collectionView.backgroundColor = .white
         collectionView.dataSource = self
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -74,5 +75,13 @@ extension TransactionListViewController: UICollectionViewDataSource {
         cell.viewModel = cellViewModel
         
         return cell
+    }
+}
+
+extension TransactionListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let transaction = transactionListViewModel.transactions[indexPath.item]
+        let detailViewController = TransactionDetailViewController(transaction: transaction)
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 final class TransactionListViewModel {
     private let networkManager: NetworkManager
-    private var transactions = [Transaction]()
+    private(set) var transactions = [Transaction]()
     private(set) var transactionCellViewModels = [TransactionCellViewModel]()
     
     var reloadCollectionViewHandler: (() -> ())?
